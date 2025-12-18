@@ -2,9 +2,13 @@ extern crate bindgen;
 
 use std::env;
 
+use project_root::get_project_root;
+
 fn main() {
-	let dir = std::env::var("CARGO_MANIFEST_DIR").expect("Unable to find manifest dir.");
-	println!("{}", dir);
+	let mut dir = get_project_root().expect("Unable to find project root.");
+	println!("{}", dir.display());
+
+	dir.push(".env");
 	dotenvy::from_path(dir).expect("Unable to find .env file for slang-rs.");
 
 	println!("cargo:rerun-if-env-changed=SLANG_DIR");
