@@ -3,7 +3,7 @@ extern crate bindgen;
 use std::env;
 
 fn main() {
-	println!("{}", std::env::current_dir().unwrap().display());
+	println!("{}", std::env::var("GAIA_MANIFEST_DIR").unwrap());
 	let dotfile = dotenvy::dotenv().expect("Unable to find .env file for slang-rs.");
 
 	println!("{}", dotfile.display());
