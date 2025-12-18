@@ -3,8 +3,10 @@ extern crate bindgen;
 use std::env;
 
 fn main() {
-	dotenvy::dotenv().expect("Unable to find .env file for slang-rs.");
-	println!("{}", std::env::current_dir().unwrap().display());
+	let dotfile = dotenvy::dotenv().expect("Unable to find .env file for slang-rs.");
+
+	println!("{}", dotfile.display());
+
 	println!("cargo:rerun-if-env-changed=SLANG_DIR");
 	println!("cargo:rerun-if-env-changed=SLANG_INCLUDE_DIR");
 	println!("cargo:rerun-if-env-changed=SLANG_LIB_DIR");
