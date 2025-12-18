@@ -2,15 +2,14 @@ extern crate bindgen;
 
 use std::env;
 
-use project_root::get_project_root;
-
 fn main() {
-	let mut dir = std::env::var("GAIA_CORE_DIR")
+	let dir = std::env::var("GAIA_CORE_DIR")
 		.expect("GAIA_CORE_DIR env variable must be set to the root of the gaia core project.");
-	println!("{}", dir.display());
+	println!("{}", dir);
+	println!("{}", std::env::var("OUT_DIR").unwrap());
 
-	dir.push(".env");
-	dotenvy::from_path(dir).expect("Unable to find .env file for slang-rs.");
+	std::env::set_current_dir(&dir).unwrap();
+	dotenvy::from_path(".env").expect("Unable to find .env file for slang-rs.");
 
 	println!("cargo:rerun-if-env-changed=SLANG_DIR");
 	println!("cargo:rerun-if-env-changed=SLANG_INCLUDE_DIR");
