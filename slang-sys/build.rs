@@ -5,7 +5,8 @@ use std::env;
 use project_root::get_project_root;
 
 fn main() {
-	let mut dir = get_project_root().expect("Unable to find project root.");
+	let mut dir = std::env::var("GAIA_CORE_DIR")
+		.expect("GAIA_CORE_DIR env variable must be set to the root of the gaia core project.");
 	println!("{}", dir.display());
 
 	dir.push(".env");
